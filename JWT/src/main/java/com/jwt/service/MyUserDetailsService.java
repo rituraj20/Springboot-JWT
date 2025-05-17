@@ -1,4 +1,6 @@
 package com.jwt.service;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +26,19 @@ public class MyUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("User 404");
 		}
 		return new UserPrincipal(user);
+	}
+
+	public User saveUser(User user) {
+		userRepo.save(user);
+		return user;
+		
+	}
+
+	public List<User> getDetails() {
+		// TODO Auto-generated method stub
+		 return userRepo.findAll();
+		
+		
 	}
 
 }
