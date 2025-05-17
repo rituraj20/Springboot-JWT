@@ -1,8 +1,9 @@
 package com.jwt.service;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +18,7 @@ import com.jwt.model.UserPrincipal;
 public class MyUserDetailsService implements UserDetailsService {
 	@Autowired
 	UserRepository userRepo;
-
+    
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user=userRepo.findByUsername(username);
