@@ -3,7 +3,6 @@ package com.jwt.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-
 import org.springframework.context.annotation.Bean;
 
 import org.springframework.context.annotation.Configuration;
@@ -31,8 +30,8 @@ import com.jwt.service.MyUserDetailsService;
 public class SecurityConfiguration {
 	@Autowired
 	MyUserDetailsService userDetail;
-//	@Autowired
-//	JwtFilter jwtFilter;
+	@Autowired
+	JwtFilter jwtFilter;
 	
 	@Bean
 	public AuthenticationProvider authProvider() {
@@ -51,8 +50,8 @@ public class SecurityConfiguration {
 						.anyRequest().authenticated());
 				//http.formLogin(Customizer.withDefaults());
 				http.httpBasic(Customizer.withDefaults());
-			http.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-			//.addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class);
+			http.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+			.addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class);
 			return http.build();
 	}
     @Bean
